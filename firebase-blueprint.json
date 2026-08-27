@@ -1,0 +1,109 @@
+{
+  "entities": {
+    "Journal": {
+      "title": "Journal",
+      "description": "User-isolated journal entries containing multi-turn dialogue, reflections, AI synthesis, and tags",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "summary": { "type": "string" },
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "role": { "type": "string", "enum": ["user", "gemini"] },
+              "text": { "type": "string" },
+              "timestamp": { "type": "string" }
+            }
+          }
+        },
+        "keyPoints": { "type": "array", "items": { "type": "string" } },
+        "actionItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "text": { "type": "string" },
+              "status": { "type": "string", "enum": ["suggested", "accepted", "completed", "dismissed"] }
+            }
+          }
+        },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "isPinned": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "title", "messages", "createdAt"]
+    },
+    "ActionItem": {
+      "title": "ActionItem",
+      "description": "Smart action item extracted from conversations",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "journalId": { "type": "string" },
+        "text": { "type": "string" },
+        "status": { "type": "string", "enum": ["suggested", "accepted", "completed", "dismissed"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "text", "status", "createdAt"]
+    },
+    "Idea": {
+      "title": "Idea",
+      "description": "Curated idea in the user Idea Vault",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "sourceJournalId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "title", "createdAt"]
+    },
+    "WeeklyReflection": {
+      "title": "WeeklyReflection",
+      "description": "Synthesized weekly reflection across journals",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "weekStartDate": { "type": "string" },
+        "weekEndDate": { "type": "string" },
+        "keyThemes": { "type": "array", "items": { "type": "string" } },
+        "focusedOn": { "type": "array", "items": { "type": "string" } },
+        "lessonsLearned": { "type": "array", "items": { "type": "string" } },
+        "nextSteps": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "keyThemes", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/journals/{journalId}": {
+      "schema": "Journal",
+      "description": "Personal journal documents isolated by user UID"
+    },
+    "/users/{userId}/actionItems/{actionItemId}": {
+      "schema": "ActionItem",
+      "description": "User actionable items extracted from reflection"
+    },
+    "/users/{userId}/ideas/{ideaId}": {
+      "schema": "Idea",
+      "description": "Saved idea vault entries"
+    },
+    "/users/{userId}/weeklyReflections/{reflectionId}": {
+      "schema": "WeeklyReflection",
+      "description": "Weekly reflection summaries"
+    }
+  }
+}

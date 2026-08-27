@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+    --font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --color-bg: #FDFCF9;
+    --color-surface: #F5F2ED;
+    --color-ink: #1A1A1A;
+    --color-gold: #C5A059;
+    --color-border: #E5E2DA;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #FDFCF9;
+    color: #1A1A1A;
+  }
+
+  h1, h2, h3, .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+/* Custom editorial scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #FDFCF9;
+}
+::-webkit-scrollbar-thumb {
+  background: #D8D2C5;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C5A059;
+}
+
+/* Editorial aesthetic paper sheets and surfaces */
+.paper-sheet {
+  background-color: #FFFFFF;
+  border: 1px solid #E8E4DB;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.03), 0 6px 18px -8px rgba(26, 26, 26, 0.05);
+}
+
+.paper-sheet-elevated {
+  background-color: #FFFFFF;
+  border: 1px solid #E2DCD2;
+  box-shadow: 0 4px 20px -4px rgba(26, 26, 26, 0.07), 0 2px 6px -1px rgba(26, 26, 26, 0.02);
+}
+
+.editorial-card {
+  background-color: #F5F2ED;
+  border: 1px solid #E5E0D5;
+}
+
+.editorial-gold-line {
+  background: linear-gradient(90deg, #C5A059 0%, transparent 100%);
+}
+
+.paper-line {
+  border-bottom: 1px solid #EAE5DC;
+}
+
+/* Typography styles */
+.editorial-dropcap::first-letter {
+  font-family: var(--font-serif);
+  float: left;
+  font-size: 3.5rem;
+  line-height: 0.85;
+  padding-top: 4px;
+  padding-right: 8px;
+  padding-bottom: 2px;
+  color: #C5A059;
+}
+

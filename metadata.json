@@ -1,0 +1,6 @@
+{
+  "name": "Elyra",
+  "description": "Elyra — A private, luxury AI-powered personal journal with user-isolated Firestore storage and server-side Gemini intelligence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
